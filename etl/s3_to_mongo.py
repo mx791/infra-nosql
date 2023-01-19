@@ -6,8 +6,27 @@ sc = spark.sparkContext
 
 # Chargement des dataframes dans Mongo
 def load(dataframe):
-    # TODO
-    return {"good": len(dataframe), "errors": 0}
+
+    import pymongo
+
+    myclient = pymongo.MongoClient("mongodb://MONGO_MASTER_IP:27017/")
+    mydb = myclient["mydatabase"]
+    mytable = mydb["customers"]
+    columns = dataframe.columns
+
+    dictionnary_list = []
+    errors = 0
+    for id in range(len(dataframe)):
+        try:
+            dict = {}
+            for col in columns:
+                dict[col] = dataframe[col][id]
+            dictionnary_list.append(dict)
+        except:
+            errors += 1
+        
+    mytable.insert_many(dictionnary_list)
+    return {"good": len(dictionnary_list), "errors": errors}
 
 # Téléchargement des fichiers de S3
 def extract_transform(file_url):
