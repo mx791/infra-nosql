@@ -1,0 +1,52 @@
+version: "3.3"
+
+services:
+
+  mongo:
+    image: mongo
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - cluster
+    restart: always
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8080:8081
+    networks:
+      - cluster
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/
+    restart: always
+
+  
+  spark-master:
+    build: .
+    ports:
+      - 9090:8080
+      - 7077:7077
+    volumes:
+      - ./apps:/opt/spark-apps
+      - ./data:/opt/spark-data
+    environment:
+      - SPARK_LOCAL_IP=spark-master
+      - SPARK_MODE=master
+    networks:
+      - cluster
+    restart: always
+
+  
+  pyspark:
+    image: jupyter/pyspark-notebook:python-3.8
+    ports:
+      - 8888:8888
+    networks:
+      - cluster
+    restart: always
+ 
+networks:
+  cluster:

@@ -1,0 +1,26 @@
+version: "3.3"
+
+services:
+
+  spark-worker:
+    build: .
+    ports:
+      - "9091:8080"
+    depends_on:
+      - spark-master
+    environment:
+      - SPARK_MASTER_URL=spark://${MASTER_IP}:7077
+      - SPARK_MODE=worker
+      - SPARK_LOCAL_IP=spark-worker
+    restart: always
+  
+  mongo-worker:
+    image: mongo
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - 27017:27017
+    restart: always
+
+
