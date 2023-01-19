@@ -44,3 +44,8 @@ rs.initiate({
 })
 ```
 En adaptant bien évidemment les adresses des noeuds.
+
+
+## Schéma récapitulatif
+
+![Schéma](./main-infra.PNG)
