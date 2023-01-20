@@ -1,3 +1,4 @@
 FROM bitnami/spark
 
-RUN pip install -r pandas numpy httpx pymongo
+RUN python --version
+RUN pip install pandas numpy httpx pymongo
