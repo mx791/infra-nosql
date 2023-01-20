@@ -6,8 +6,6 @@ services:
     build: .
     ports:
       - "9091:8080"
-    depends_on:
-      - spark-master
     environment:
       - SPARK_MASTER_URL=spark://${MASTER_IP}:7077
       - SPARK_MODE=worker
