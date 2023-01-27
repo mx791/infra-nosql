@@ -25,7 +25,7 @@ services:
 
   
   spark-master:
-    build: .
+    image: mx791/spark-py
     ports:
       - 9090:8080
       - 7077:7077
