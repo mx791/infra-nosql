@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   spark-worker:
-    build: .
+    image: mx791/spark-py
     ports:
       - "9091:8080"
     environment:
