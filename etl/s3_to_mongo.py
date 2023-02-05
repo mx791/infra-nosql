@@ -14,6 +14,8 @@ def load(dataframe):
     mydb = myclient["projet_nosql"]
     mytable = mydb["taxis"]
     
+    print(list(mydb.list_collection_names()))
+    
     errors = 0
     loaded = 0
 
