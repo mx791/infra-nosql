@@ -34,7 +34,7 @@ def load(dataframe):
         except:
             errors += 1
         if id % 1000 == 0:
-            print(mytable.insert_many(dictionnary_list))
+            mytable.insert_many(dictionnary_list)
             dictionnary_list = []
             print(loaded, errors)
 
@@ -49,7 +49,7 @@ def extract_transform(file_url):
     print("download...")
 
     # limite la taille de telechargement pour le tests
-    truncate_after = 100  * 1024 * 1024
+    truncate_after = int(102  * 1024 * 1024)
 
     with httpx.stream("GET", file_url) as response:
         body = ""
