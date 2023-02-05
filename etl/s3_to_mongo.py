@@ -30,12 +30,13 @@ def load(dataframe):
                 for col in columns:
                     dict[col] = dataframe[col][id]
                 dictionnary_list.append(dict)
-                mytable.insert_many(dictionnary_list)
                 loaded += 1
         except:
             errors += 1
         if id % 1000 == 0:
-            print(loaded)
+            mytable.insert_many(dictionnary_list)
+            dictionnary_list = []
+            print(loaded, errors)
 
     print(len(dictionnary_list), len(df))
         
