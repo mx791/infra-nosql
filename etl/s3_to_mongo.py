@@ -49,7 +49,7 @@ def extract_transform(file_url):
     print("download...")
 
     # limite la taille de telechargement pour le tests
-    truncate_after = int(102  * 1024 * 1024)
+    truncate_after = int(3 * 1024  * 1024 * 1024)
 
     with httpx.stream("GET", file_url) as response:
         body = ""
