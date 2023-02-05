@@ -33,7 +33,7 @@ def load(dataframe):
                 loaded += 1
         except:
             errors += 1
-        if len(dictionnary_list) > 5000 or len(dataframe) == id + 1:
+        if len(dictionnary_list) > 25000 or len(dataframe) == id + 1:
             mytable.insert_many(dictionnary_list)
             dictionnary_list = []
             print(loaded, errors)
@@ -49,7 +49,7 @@ def extract_transform(file_url):
     print("download...")
 
     # limite la taille de telechargement pour le tests
-    truncate_after = int(350  * 1024 * 1024)
+    truncate_after = int(500  * 1024 * 1024)
 
     with httpx.stream("GET", file_url) as response:
         body = ""
