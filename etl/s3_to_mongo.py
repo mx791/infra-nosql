@@ -33,7 +33,7 @@ def load(dataframe):
                 loaded += 1
         except:
             errors += 1
-        if id % 1000 == 0:
+        if len(dictionnary_list) > 5000 or len(dataframe) == id + 1:
             mytable.insert_many(dictionnary_list)
             dictionnary_list = []
             print(loaded, errors)
