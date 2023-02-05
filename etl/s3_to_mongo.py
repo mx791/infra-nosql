@@ -18,11 +18,12 @@ def load(dataframe):
     errors = 0
     loaded = 0
     columns = dataframe.columns
+    dictionnary_list = []
 
     for id in range(len(dataframe)):
 
         dt = dataframe["Trip Start Timestamp"][id]
-        dictionnary_list = []
+        
         try:
             if "2018" in dt or "2019" in dt or "2020" in dt:
                 dict = {}
