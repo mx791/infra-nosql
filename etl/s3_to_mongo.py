@@ -59,7 +59,7 @@ def extract_transform(file_url):
             body += str(chunk)
             if int(response.num_bytes_downloaded / truncate_after * 100) != last_index:
                 last_index = int(response.num_bytes_downloaded / truncate_after * 100)
-                print("Telechargement: ", last_index , "%", int(response.num_bytes_downloaded/(1024 * 1024)), "/", int(truncate_after/(1024*1024))
+                print("Telechargement: ", last_index , "%", int(response.num_bytes_downloaded/(1024 * 1024)), "/", int(truncate_after/(1024*1024)))
             if response.num_bytes_downloaded >= truncate_after:
                 break
     
