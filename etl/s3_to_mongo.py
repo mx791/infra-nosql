@@ -7,12 +7,15 @@ from datetime import datetime
 
 # Chargement des dataframes dans Mongo
 def load(dataframe):
+    
+    print("load: ", len(dataframe))
 
     myclient = pymongo.MongoClient("mongodb://192.168.3.160:27017/")
     mydb = myclient["projet_nosql"]
     mytable = mydb["taxis"]
     
     errors = 0
+    loaded = 0
 
 
     columns = dataframe.columns
@@ -28,8 +31,11 @@ def load(dataframe):
                     dict[col] = dataframe[col][id]
                 dictionnary_list.append(dict)
                 mytable.insert_many(dictionnary_list)
+                loaded += 1
         except:
             errors += 1
+        if id % 1000 == 0:
+            print(loaded)
 
     print(len(dictionnary_list), len(df))
         
