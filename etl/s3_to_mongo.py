@@ -13,7 +13,7 @@ mytable.delete_many({})
 # Chargement des dataframes dans Mongo
 def load(dataframe):
     
-    print("load: ", len(dataframe))
+    print("Analyse de ", len(dataframe), "lignes")
     
     errors = 0
     loaded = 0
@@ -37,20 +37,17 @@ def load(dataframe):
         if len(dictionnary_list) > 25000 or len(dataframe) == id + 1:
             mytable.insert_many(dictionnary_list)
             dictionnary_list = []
-            print("chargement de ", loaded, "lignes")
-
-    print(len(dictionnary_list), len(df))
-        
+            print("chargement de", loaded, "lignes")        
     
     return {"good": len(dictionnary_list), "errors": errors}
 
 # Téléchargement des fichiers de S3
 def extract_transform(file_url):
 
-    print("Telechargement du fichier", file_url)
+    print("Telechargement du fichier")
 
     # limite la taille de telechargement pour le tests
-    truncate_after = int(500  * 1024 * 1024)
+    truncate_after = int(1024  * 1024 * 1024)
 
     last_index = 0
     with httpx.stream("GET", file_url) as response:
@@ -59,7 +56,7 @@ def extract_transform(file_url):
             body += str(chunk)
             if int(response.num_bytes_downloaded / truncate_after * 100) != last_index:
                 last_index = int(response.num_bytes_downloaded / truncate_after * 100)
-                print("Telechargement: ", last_index , "%", int(response.num_bytes_downloaded/(1024 * 1024)), "/", int(truncate_after/(1024*1024)))
+                print("Telechargement:", last_index , "%, ", int(response.num_bytes_downloaded/(1024 * 1024)), "Mb /", int(truncate_after/(1024*1024)))
             if response.num_bytes_downloaded >= truncate_after:
                 break
     
@@ -86,7 +83,6 @@ s3_file_liste = [
 for file in s3_file_liste:
     try:
         df = extract_transform(file)
-        print(df.columns)
         load(df)
     except:
-        pass
+        print("une erreur est survenue lors du telechargement")
