@@ -33,10 +33,11 @@ def load(dataframe):
                 loaded += 1
         except:
             errors += 1
+            
         if len(dictionnary_list) > 25000 or len(dataframe) == id + 1:
             mytable.insert_many(dictionnary_list)
             dictionnary_list = []
-            print(loaded, errors)
+            print("chargement de ", loaded, "lignes")
 
     print(len(dictionnary_list), len(df))
         
@@ -46,15 +47,19 @@ def load(dataframe):
 # Téléchargement des fichiers de S3
 def extract_transform(file_url):
 
-    print("download...")
+    print("Telechargement du fichier", file_url)
 
     # limite la taille de telechargement pour le tests
     truncate_after = int(500  * 1024 * 1024)
 
+    last_index = 0
     with httpx.stream("GET", file_url) as response:
         body = ""
         for chunk in response.iter_bytes():
             body += str(chunk)
+            if int(response.num_bytes_downloaded / truncate_after * 100) != last_index:
+                last_index = int(response.num_bytes_downloaded / truncate_after * 100)
+                print("Telechargement: ", last_index , "%", int(response.num_bytes_downloaded/(1024 * 1024)), "/", int(truncate_after/(1024*1024))
             if response.num_bytes_downloaded >= truncate_after:
                 break
     
