@@ -10,7 +10,7 @@ def load(dataframe):
     
     print("load: ", len(dataframe))
 
-    myclient = pymongo.MongoClient("mongodb://192.168.3.160:27017/")
+    myclient = pymongo.MongoClient("mongodb://192.168.3.160:27018/")
     mydb = myclient["projet_nosql"]
     mytable = mydb["taxis"]
     
