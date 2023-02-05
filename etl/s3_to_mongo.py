@@ -4,22 +4,17 @@ import pandas as pd
 from io import StringIO
 from datetime import datetime
 
+myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
+mydb = myclient["projet_nosql"]
+mytable = mydb["taxis"]
 
 # Chargement des dataframes dans Mongo
 def load(dataframe):
     
     print("load: ", len(dataframe))
-
-    myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
-    mydb = myclient["projet_nosql"]
-    mytable = mydb["taxis"]
-    
-    print(list(mydb.list_collection_names()))
     
     errors = 0
     loaded = 0
-
-
     columns = dataframe.columns
 
     for id in range(len(dataframe)):
