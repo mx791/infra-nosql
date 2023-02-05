@@ -8,6 +8,8 @@ myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
 mydb = myclient["projet_nosql"]
 mytable = mydb["taxis"]
 
+mytable.delete_many({})
+
 # Chargement des dataframes dans Mongo
 def load(dataframe):
     
@@ -46,7 +48,7 @@ def extract_transform(file_url):
     print("download...")
 
     # limite la taille de telechargement pour le tests
-    truncate_after = 10  * 1024 * 1024
+    truncate_after = 100  * 1024 * 1024
 
     with httpx.stream("GET", file_url) as response:
         body = ""
