@@ -11,6 +11,7 @@ def to_num(data):
         joinded_nb = "".join(numbers)
         return float(joinded_nb)
     except:
+        print(data)
         return None
     
 myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
