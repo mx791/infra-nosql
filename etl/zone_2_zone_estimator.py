@@ -20,7 +20,8 @@ myquery = [
 
 print("\nRecherche en cours...")
 results = list(mytable.aggregate(myquery))
-print("Comparaison de ", len(results), "trajet\n")
+
+nb = 0
 
 cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
 fastest_h, fastest_ratio, fast_price = 0, 100000, 0
@@ -44,7 +45,10 @@ for doc in results:
             cheapest_h = doc["_id"]
             cheapest_ratio = price_per_mile
             cheapest_time = doc["avg_seconds"] / doc["avg_distance"]
-
+            
+        nb += doc["nb"]
+            
+print("Comparaison de ", len(results), "trajet\n")
 print("Estimation de la distance: ", mean_distance, "miles \n")
             
 print("Le moins cher:")
