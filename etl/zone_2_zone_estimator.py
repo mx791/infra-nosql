@@ -48,7 +48,7 @@ for doc in results:
             
         nb += doc["nb"]
             
-print("Comparaison de ", len(results), "trajet\n")
+print("Comparaison de ", nb, "trajet\n")
 print("Estimation de la distance: ", mean_distance, "miles \n")
             
 print("Le moins cher:")
