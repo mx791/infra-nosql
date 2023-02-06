@@ -10,6 +10,7 @@ mydb = myclient["projet_nosql"]
 mytable = mydb["taxis"]
 
 mytable.delete_many({})
+COUNT = 0
 
 # Chargement des dataframes dans Mongo
 def load(dataframe):
@@ -36,10 +37,9 @@ def load(dataframe):
         except:
             errors += 1
             
-        if len(dictionnary_list) > 25000 or len(dataframe) == id + 1:
-            mytable.insert_many(dictionnary_list)
-            dictionnary_list = []
-            print("chargement de", loaded, "lignes")        
+    print("insertion de : ", len(dictionnary_list))     
+    mytable.insert_many(dictionnary_list)     
+    print("done")
     
     return {"good": len(dictionnary_list), "errors": errors}
 
@@ -49,7 +49,7 @@ def extract_transform(file_url):
     print("Telechargement du fichier")
 
     # limite la taille de telechargement pour le tests
-    truncate_after = int(3 * 1024  * 1024 * 1024)
+    truncate_after = int(2 * 1024  * 1024 * 1024)
 
     last_index = 0
     with httpx.stream("GET", file_url) as response:
