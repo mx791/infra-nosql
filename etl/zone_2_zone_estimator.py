@@ -18,31 +18,38 @@ myquery = [
     }
 ]
 
+print("\nRecherche en cours... \n")
 results = list(mytable.aggregate(myquery))
 
-cheapest_h, cheapest_ratio, predicted_price = 0, 100000, 0
-fastest_h, fastest_ratio, predicted_time = 0, 100000, 0
+cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
+fastest_h, fastest_ratio, fast_price = 0, 100000, 0
+
+mean_distance = 0
 
 for doc in results:
+    
     if doc["_id"] != None:
+        
+        mean_distance += doc["avg_distance"] / len(results)
         
         s_per_mile = doc["avg_seconds"] / doc["avg_distance"]
         if s_per_mile < fastest_ratio:
             fastest_h = doc["_id"]
             fastest_ratio = s_per_mile
-            predicted_time = s_per_mile * doc["avg_distance"]
+            fast_price = doc["avg_price"] / doc["avg_distance"]
             
         price_per_mile = doc["avg_price"] / doc["avg_distance"]
         if s_per_mile < cheapest_ratio:
             cheapest_h = doc["_id"]
             cheapest_ratio = price_per_mile
-            predicted_price = price_per_mile * doc["avg_distance"]
+            cheapest_time = doc["avg_price"] / doc["avg_distance"]
             
 print("Le moins cher:")
 print("départ à ", cheapest_h, "h, estimation: ", cheapest_ratio, "$ / mile")
-print("prix estimé:", int(predicted_price), "$ \n")
-
+print("prix estimé:", int(mean_distance * cheapest_ratio), "$ \n")
+print("temps estimé:", int(cheapest_time * cheapest_ratio / 60), "m \n")
 
 print("Le plus rapide:")
 print("départ à ", fastest_h, "h, estimation: ", fastest_ratio, "seconds / mile")
+print("prix estimé:", int(mean_distance * fast_price), "$ \n")
 print("temps estimé:", int(predicted_time / 60), "m \n")
