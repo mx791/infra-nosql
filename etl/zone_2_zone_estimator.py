@@ -18,8 +18,9 @@ myquery = [
     }
 ]
 
-print("\nRecherche en cours... \n")
+print("\nRecherche en cours...")
 results = list(mytable.aggregate(myquery))
+print("Comparaison de ", len(results), "trajet\n")
 
 cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
 fastest_h, fastest_ratio, fast_price = 0, 100000, 0
