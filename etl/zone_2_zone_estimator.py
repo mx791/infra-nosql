@@ -18,4 +18,4 @@ myquery = [
     }
 ]
 
-print(mytable.aggregate(myquery))
+print(list(mytable.aggregate(myquery)))
