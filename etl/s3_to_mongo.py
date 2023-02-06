@@ -67,11 +67,16 @@ def extract_transform(file_url):
     body = body.replace("'b'", "")
     body = body.replace("b'", "")
     body = body.replace("'b", "")
+    
+    lines = body.split(";")
 
     CHUNKS = 150000
     for ids in range(1, len(lines), CHUNKS):
-        df = pd.read_csv(StringIO(lines[0] + ";" + ";".join(lines[ids:ids+CHUNKS])), lineterminator=";")
-        load(df)
+        try:
+            df = pd.read_csv(StringIO(lines[0] + ";" + ";".join(lines[ids:ids+CHUNKS])), lineterminator=";")
+            load(df)
+        except:
+            print("erreur avec le chunk", ids)
 
     return df
 
