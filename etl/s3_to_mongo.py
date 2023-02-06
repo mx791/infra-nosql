@@ -31,6 +31,10 @@ def load(dataframe):
                 dict = {}
                 for col in columns:
                     dict[col] = dataframe[col][id]
+                    
+                dict["Pickup Hour"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").hour
+                dict["Pickup Year"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").year
+                dict["Pickup Month"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").month
                         
                 dictionnary_list.append(dict)
                 loaded += 1
