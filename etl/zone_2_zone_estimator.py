@@ -39,7 +39,7 @@ for doc in results:
             fast_price = doc["avg_price"] / doc["avg_distance"]
             
         price_per_mile = doc["avg_price"] / doc["avg_distance"]
-        if s_per_mile < cheapest_ratio:
+        if price_per_mile < cheapest_ratio:
             cheapest_h = doc["_id"]
             cheapest_ratio = price_per_mile
             cheapest_time = doc["avg_seconds"] / doc["avg_distance"]
