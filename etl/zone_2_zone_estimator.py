@@ -44,14 +44,14 @@ for doc in results:
             cheapest_ratio = price_per_mile
             cheapest_time = doc["avg_seconds"] / doc["avg_distance"]
 
-print("Estimation de la distance: ", mean_distance, "\n")
+print("Estimation de la distance: ", mean_distance, "miles \n")
             
 print("Le moins cher:")
 print("départ à ", cheapest_h, "h, estimation: ", cheapest_ratio, "$ / mile")
 print("prix estimé:", mean_distance * cheapest_ratio, "$")
-print("temps estimé:", mean_distance * cheapest_time / 60, "m \n")
+print("temps estimé:", mean_distance * cheapest_time / 60, "minutes \n")
 
 print("Le plus rapide:")
 print("départ à ", fastest_h, "h, estimation: ", fastest_ratio, "seconds / mile")
 print("prix estimé:", mean_distance * fast_price, "$")
-print("temps estimé:", fastest_ratio * mean_distance / 60, "m \n")
+print("temps estimé:", fastest_ratio * mean_distance / 60, "minutes \n")
