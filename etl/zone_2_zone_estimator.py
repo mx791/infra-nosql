@@ -20,8 +20,8 @@ myquery = [
 
 results = list(mytable.aggregate(myquery))
 
-cheapest_h, cheapest_ratio = 0, 100000
-fastest_h, fastest_ratio = 0, 100000
+cheapest_h, cheapest_ratio, , predicted_price = 0, 100000, 0
+fastest_h, fastest_ratio, predicted_time = 0, 100000, 0
 
 for doc in results:
     if doc["_id"] != None:
@@ -30,15 +30,19 @@ for doc in results:
         if s_per_mile < fastest_ratio:
             fastest_h = doc["_id"]
             fastest_ratio = s_per_mile
+            predicted_time = s_per_mile * doc["avg_distance"]
             
         price_per_mile = doc["avg_price"] / doc["avg_distance"]
         if s_per_mile < cheapest_ratio:
             cheapest_h = doc["_id"]
             cheapest_ratio = price_per_mile
+            predicted_price = price_per_mile * doc["avg_distance"]
             
 print("Le moins cher:")
 print("départ à ", cheapest_h, "h, estimation: ", cheapest_ratio, "$ / mile")
+print("prix estimé:", int(predicted_price), "$ \n")
 
 
 print("Le plus rapide:")
 print("départ à ", fastest_h, "h, estimation: ", fastest_ratio, "seconds / mile")
+print("temps estimé:", int(predicted_time / 60), "m, "\n")
