@@ -24,16 +24,16 @@ cheapest_h, cheapest_ratio = 0, 100000
 fastest_h, fastest_ratio = 0, 100000
 
 for doc in results:
-    if results["_id"] != None:
+    if doc["_id"] != None:
         
-        s_per_mile = results["avg_seconds"] / results["avg_distance"]
+        s_per_mile = doc["avg_seconds"] / doc["avg_distance"]
         if s_per_mile < fastest_ratio:
-            fastest_h = results["_id"]
+            fastest_h = doc["_id"]
             fastest_ratio = s_per_mile
             
-        price_per_mile = results["avg_price"] / results["avg_distance"]
+        price_per_mile = doc["avg_price"] / doc["avg_distance"]
         if s_per_mile < cheapest_ratio:
-            cheapest_h = results["_id"]
+            cheapest_h = doc["_id"]
             cheapest_ratio = s_per_mile
             
 print("Le moins cher:")
