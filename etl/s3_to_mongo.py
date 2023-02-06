@@ -4,6 +4,15 @@ import pandas as pd
 from io import StringIO
 from datetime import datetime
 
+
+def to_num(data):
+    try:
+        numbers = re.findall("[0-9.]+", str(data))
+        joinded_nb = "".join(numbers)
+        return float(joinded_nb)
+    except:
+        return None
+    
 myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
 mydb = myclient["projet_nosql"]
 mytable = mydb["taxis"]
@@ -19,6 +28,8 @@ def load(dataframe):
     loaded = 0
     columns = dataframe.columns
     dictionnary_list = []
+    
+    num_cols = ["Trip Seconds", "Trip Miles", "Pickup Community Area", "Dropoff Community Area", "Fare"]
 
     for id in range(len(dataframe)):
 
@@ -28,7 +39,11 @@ def load(dataframe):
             if "2018" in dt or "2019" in dt or "2020" in dt:
                 dict = {}
                 for col in columns:
-                    dict[col] = dataframe[col][id]
+                    if col in num_cols:
+                        dict[col] = to_num(dataframe[col][id])
+                    else:
+                        dict[col] = dataframe[col][id]
+                        
                 dictionnary_list.append(dict)
                 loaded += 1
         except:
