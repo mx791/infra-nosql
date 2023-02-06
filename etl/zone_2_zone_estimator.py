@@ -34,7 +34,7 @@ for doc in results:
         price_per_mile = doc["avg_price"] / doc["avg_distance"]
         if s_per_mile < cheapest_ratio:
             cheapest_h = doc["_id"]
-            cheapest_ratio = s_per_mile
+            cheapest_ratio = price_per_mile
             
 print("Le moins cher:")
 print("départ à ", cheapest_h, "h, estimation: ", cheapest_ratio, "$ / mile")
