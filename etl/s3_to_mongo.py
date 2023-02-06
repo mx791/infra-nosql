@@ -65,6 +65,8 @@ def extract_transform(file_url):
     # bug d'encodage -> on remplace les sauts de ligne par un autre char
     body = body.replace("\\n", ";")
     body = body.replace("'b'", "")
+    body = body.replace("b'", "")
+    body = body.replace("'b", "")
     df = pd.read_csv(StringIO(body), lineterminator=";")
 
     return df
