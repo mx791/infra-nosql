@@ -18,4 +18,7 @@ myquery = [
     }
 ]
 
-print(list(mytable.aggregate(myquery)))
+results = mytable.aggregate(myquery)
+
+for x in results:
+  print(x)
