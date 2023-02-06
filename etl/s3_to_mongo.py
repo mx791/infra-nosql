@@ -34,9 +34,6 @@ def load(dataframe):
         except:
             errors += 1
             
-        if len(dictionnary_list) == 1:
-            print(dictionnary_list)
-            
         if len(dictionnary_list) > 25000 or len(dataframe) == id + 1:
             mytable.insert_many(dictionnary_list)
             dictionnary_list = []
