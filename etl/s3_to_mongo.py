@@ -40,10 +40,12 @@ def load(dataframe):
             if "2018" in dt or "2019" in dt or "2020" in dt:
                 dict = {}
                 for col in columns:
-                    if col in num_cols:
-                        dict[col] = to_num(dataframe[col][id])
-                    else:
-                        dict[col] = dataframe[col][id]
+                    #if col in num_cols:
+                        #dict[col] = to_num(dataframe[col][id])
+                    #else:
+                        #dict[col] = dataframe[col][id]
+                        
+                    dict[col] = dataframe[col][id]
                         
                 dictionnary_list.append(dict)
                 loaded += 1
@@ -78,7 +80,7 @@ def extract_transform(file_url):
     
     # bug d'encodage -> on remplace les sauts de ligne par un autre char
     body = body.replace("\\n", ";")
-    body = body.replace("b'", "")
+    body = body.replace("'b'", "")
     df = pd.read_csv(StringIO(body), lineterminator=";")
 
     return df
