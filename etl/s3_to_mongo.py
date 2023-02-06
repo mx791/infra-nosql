@@ -21,8 +21,6 @@ def load(dataframe):
     columns = dataframe.columns
     dictionnary_list = []
     
-    num_cols = ["Trip Seconds", "Trip Miles", "Pickup Community Area", "Dropoff Community Area", "Fare"]
-
     for id in range(len(dataframe)):
 
         dt = dataframe["Trip Start Timestamp"][id]
@@ -51,7 +49,7 @@ def extract_transform(file_url):
     print("Telechargement du fichier")
 
     # limite la taille de telechargement pour le tests
-    truncate_after = int(500  * 1024 * 1024)
+    truncate_after = int(300  * 1024 * 1024)
 
     last_index = 0
     with httpx.stream("GET", file_url) as response:
