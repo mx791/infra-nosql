@@ -49,7 +49,7 @@ def extract_transform(file_url):
     print("Telechargement du fichier")
 
     # limite la taille de telechargement pour le tests
-    truncate_after = int(300  * 1024 * 1024)
+    truncate_after = int(650  * 1024 * 1024)
 
     last_index = 0
     with httpx.stream("GET", file_url) as response:
@@ -67,7 +67,11 @@ def extract_transform(file_url):
     body = body.replace("'b'", "")
     body = body.replace("b'", "")
     body = body.replace("'b", "")
-    df = pd.read_csv(StringIO(body), lineterminator=";")
+
+    CHUNKS = 150000
+    for ids in range(1, len(lines), CHUNKS):
+        df = pd.read_csv(StringIO(lines[0] + ";" + ";".join(lines[ids:ids+CHUNKS])), lineterminator=";")
+        load(df)
 
     return df
 
@@ -81,6 +85,5 @@ s3_file_liste = [
 for file in s3_file_liste:
     try:
         df = extract_transform(file)
-        load(df)
     except:
         print("une erreur est survenue lors du telechargement")
