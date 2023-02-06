@@ -45,4 +45,4 @@ print("prix estimé:", int(predicted_price), "$ \n")
 
 print("Le plus rapide:")
 print("départ à ", fastest_h, "h, estimation: ", fastest_ratio, "seconds / mile")
-print("temps estimé:", int(predicted_time / 60), "m, "\n")
+print("temps estimé:", int(predicted_time / 60), "m \n")
