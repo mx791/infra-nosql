@@ -20,7 +20,7 @@ myquery = [
 
 results = list(mytable.aggregate(myquery))
 
-cheapest_h, cheapest_ratio, , predicted_price = 0, 100000, 0
+cheapest_h, cheapest_ratio, predicted_price = 0, 100000, 0
 fastest_h, fastest_ratio, predicted_time = 0, 100000, 0
 
 for doc in results:
