@@ -1,6 +1,6 @@
 import pymongo
 import pandas as pd
-import matplotlib as plt 
+import matplotlib.pyplot as plt 
 
 
 myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
