@@ -31,7 +31,7 @@ for doc in results:
         if min_tips >= doc["avg_tips"]:
             min_tips_h = doc["_id"]
             min_tips = doc["avg_tips"]
-        elif max_tips >= doc["avg_tips"]:
+        elif max_tips <= doc["avg_tips"]:
             max_tips_h = doc["_id"]
             max_tips = doc["avg_tips"]
         nb += doc["nb"]
