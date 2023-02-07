@@ -36,7 +36,7 @@ results = pd.DataFrame(list(mytable.find(myquery)))
 end = time.time()
 print("La query a mis {}s à s'exécuter".format(np.round(end-start)))
 
-print(results
+print(results)
 # cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
 # fastest_h, fastest_ratio, fast_price = 0, 100000, 0
 
