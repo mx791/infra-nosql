@@ -1,4 +1,5 @@
 import pymongo
+import time
 
 myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
 mydb = myclient["projet_nosql"]
@@ -19,6 +20,9 @@ myquery = [
 ]
 
 print("\nRecherche en cours...")
+start = time.time()
+end = time.time()
+print("La requête a mis {}s à s'exécuter".format(end-start))
 results = list(mytable.aggregate(myquery))
 
 nb = 0
