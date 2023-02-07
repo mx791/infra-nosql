@@ -12,8 +12,8 @@ destination_area =  int(input("dropoff area:"))
 print("\nRecherche en cours...")
 start = time.time()
 cc = 0
-for i in range(1, 50):
-    for e in range(1, 50):
+for i in range(1, 10):
+    for e in range(1, 10):
         myquery = [
             {"$match": {"Pickup Community Area": start_area, "Dropoff Community Area": destination_area}},
             {"$group": {
@@ -27,7 +27,7 @@ for i in range(1, 50):
         results = list(mytable.aggregate(myquery))
         cc += 1
 end = time.time()
-print("La requête a mis {}s à s'exécuter".format((end-start)))
+print("La requête a mis {}s à s'exécuter".format((end-start)/cc))
 nb = 0
 
 cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
