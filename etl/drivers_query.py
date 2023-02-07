@@ -2,6 +2,7 @@ import pymongo
 import time
 import pandas as pd
 import matplotlib.pyplot as plt 
+import numpy as np
 
 try : 
     myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
@@ -29,7 +30,7 @@ myquery = [
 print("\nRecherche en cours...")
 results = pd.DataFrame(list(mytable.aggregate(myquery)))
 end = time.time()
-print("La query a mis {}s à s'exécuter".format(end-start))
+print("La query a mis {}s à s'exécuter".format(np.round(end-start)))
 print(results.sort_values(by=['avg_price'], ascending=False).head(5))
 print(results.sort_values(by=['avg_tips'], ascending=False).head(5))
 print(results.sort_values(by=['avg_time'], ascending=False).head(5))
