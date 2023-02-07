@@ -21,10 +21,9 @@ myquery = [
 
 print("\nRecherche en cours...")
 start = time.time()
+results = list(mytable.aggregate(myquery))
 end = time.time()
 print("La requête a mis {}s à s'exécuter".format(end-start))
-results = list(mytable.aggregate(myquery))
-
 nb = 0
 
 cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
