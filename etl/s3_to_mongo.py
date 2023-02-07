@@ -27,25 +27,24 @@ def load(dataframe):
         dt = dataframe["Trip Start Timestamp"][id]
         
         try:
-            if "2018" in dt or "2019" in dt or "2020" in dt or True:
-                dict = {}
-                try:
-                    for col in columns:
-                        dict[col] = dataframe[col][id]
-                    
-                    dict["Pickup Hour"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").hour
-                    dict["Pickup Year"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").year
-                    dict["Pickup Month"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").month
+            dict = {}
+            try:
+                for col in columns:
+                    dict[col] = dataframe[col][id]
 
-                    dictionnary_list.append(dict)
-                    loaded += 1
-                except:
-                    pass
-                
-                if len(dictionnary_list) % 1500 == 0:
-                    mytable.insert_many(dictionnary_list)
-                    print("insertio de ", len(dictionnary_list), "lignes")
-                    dictionnary_list = []
+                dict["Pickup Hour"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").hour
+                dict["Pickup Year"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").year
+                dict["Pickup Month"] = datetime.strptime(dataframe["Trip Start Timestamp"][id], "%m/%d/%Y %I:%M:%S %p").month
+
+                dictionnary_list.append(dict)
+                loaded += 1
+            except:
+                pass
+
+            if len(dictionnary_list) % 5000 == 0:
+                mytable.insert_many(dictionnary_list)
+                print("insertio de ", len(dictionnary_list), "lignes")
+                dictionnary_list = []
         except:
             errors += 1
             
