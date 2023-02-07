@@ -1,6 +1,7 @@
 import pymongo
 import time
 import pandas as pd
+import math
 
 myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
 mydb = myclient["projet_nosql"]
@@ -44,8 +45,9 @@ for doc in results:
             max_tips_h = doc["_id"]
             max_tips = doc["avg_tips"]
         nb += doc["nb"]
-        total_tips += doc["avg_tips"]
-        nb_community_area += 1
+        if not math.isnan(float(doc["avg_tips"])):
+            total_tips += doc["avg_tips"]
+            nb_community_area += 1
     
 min_name = df[df['No.']==int(min_tips_h)]["Name"].values[0]
 max_name = df[df['No.']==int(max_tips_h)]["Name"].values[0]
