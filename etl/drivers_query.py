@@ -18,10 +18,11 @@ myquery = [
 
 print("\nRecherche en cours...")
 results = pd.DataFrame(list(mytable.aggregate(myquery)))
-print(results)
+#print(results)
 
 
 nb = 0
+plt.plot(results.avg_tips)
 
 
 # cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
