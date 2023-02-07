@@ -22,7 +22,8 @@ myquery = [
         {"_id": "$Taxi ID", 
          "avg_price": {"$avg": "$Trip Total"}, 
          "avg_tips" : {"$avg": "$Tips"}, 
-         "avg_time" : {"$avg": "$Trip Seconds"}}}
+         "avg_time" : {"$avg": "$Trip Seconds"}
+         "avg_dist" : {"$avg": "$Trip Miles"}}}
     ]
 
 
