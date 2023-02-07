@@ -43,7 +43,7 @@ def load(dataframe):
 
             if len(dictionnary_list) % 5000 == 0:
                 mytable.insert_many(dictionnary_list)
-                print("insertio de ", len(dictionnary_list), "lignes")
+                print("insertion de ", len(dictionnary_list), "lignes", loaded)
                 dictionnary_list = []
         except:
             errors += 1
