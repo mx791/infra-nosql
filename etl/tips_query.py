@@ -19,7 +19,7 @@ print("\nRecherche en cours...")
 nb_execution = 10
 execution_times = []
 
-for i in range(nb_exection):
+for i in range(nb_execution):
     start_time = time.time()
     results = list(mytable.aggregate(myquery))
     execution_times.append(time.time() - start_time)
