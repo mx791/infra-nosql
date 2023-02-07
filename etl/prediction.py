@@ -32,7 +32,7 @@ myquery = [
 
 
 print("\nRecherche en cours...")
-results = pd.DataFrame(list(mytable.find(myquery)))
+results = pd.DataFrame(mytable.find(myquery))
 end = time.time()
 print("La query a mis {}s à s'exécuter".format(np.round(end-start)))
 
