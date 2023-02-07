@@ -42,10 +42,10 @@ def load(dataframe):
                 except:
                     pass
                 
-             if len(dictionnary_list) % 1500 == 0:
-                 mytable.insert_many(dictionnary_list)
-                 print("insertio de ", len(dictionnary_list), "lignes")
-                 dictionnary_list = []
+                if len(dictionnary_list) % 1500 == 0:
+                    mytable.insert_many(dictionnary_list)
+                    print("insertio de ", len(dictionnary_list), "lignes")
+                    dictionnary_list = []
         except:
             errors += 1
             
