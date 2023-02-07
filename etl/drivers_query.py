@@ -32,8 +32,14 @@ print("\nRecherche en cours...")
 results = pd.DataFrame(list(mytable.aggregate(myquery)))
 end = time.time()
 print("La query a mis {}s à s'exécuter".format(np.round(end-start)))
+
+print("Top 5 conducteurs avec le prix moyen le plus élevé")
 print(results.sort_values(by=['avg_price'], ascending=False).head(5))
+
+print("Top 5 conducteurs avec la distance moyenne parcourie la plus élevée")
 print(results.sort_values(by=['avg_dist'], ascending=False).head(5))
+
+print("Top 5 conducteurs avec le temps de trajet moyen le plus élevé")
 print(results.sort_values(by=['avg_time'], ascending=False).head(5))
 
 # cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
