@@ -20,10 +20,8 @@ myquery = [
 
 print("\nRecherche en cours...")
 results = pd.DataFrame(list(mytable.aggregate(myquery)))
-print(results)
-
-nb = 0
-
+print(results.sort_values(by=['avg_price'], ascending=False).head(5))
+print(results.sort_values(by=['avg_tips'], ascending=False).head(5))
 
 # cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
 # fastest_h, fastest_ratio, fast_price = 0, 100000, 0
