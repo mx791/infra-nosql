@@ -51,7 +51,7 @@ for doc in results:
     
 min_name = df[df['No.']==int(min_tips_h)]["Name"].values[0]
 max_name = df[df['No.']==int(max_tips_h)]["Name"].values[0]
-print("Comparaison de ", nb, "trajet")
+print("Comparaison de ", nb, "trajets")
 print(f"Dropoff Community Area {min_tips_h}:{min_name} avec la plus faible moyenne de tips : {min_tips}")
 print(f"Moyenne tips sur toutes les Community Areas {total_tips/nb_community_area}")
 print(f"Dropoff Community Area {max_tips_h}:{max_name} avec la plus forte moyenne de tips : {max_tips}\n")
