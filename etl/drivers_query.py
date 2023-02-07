@@ -1,15 +1,21 @@
 import pymongo
+import time
 import pandas as pd
 import matplotlib.pyplot as plt 
 
+try : 
+    myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
+except:
+    myclient = pymongo.MongoClient("mongodb://192.168.3.202:27019/")
+    
 
-myclient = pymongo.MongoClient("mongodb://192.168.3.160:27019/")
+
 mydb = myclient["projet_nosql"]
 mytable = mydb["taxis"]
 
 # start_area = int(input("pickup area:"))
 # destination_area =  int(input("dropoff area:"))
-
+start = time.time()
 myquery = [
     {"$group": 
         {"_id": "$Taxi ID", 
@@ -18,10 +24,15 @@ myquery = [
          "avg_time" : {"$avg": "$Trip Seconds"}}}
     ]
 
+
+
 print("\nRecherche en cours...")
 results = pd.DataFrame(list(mytable.aggregate(myquery)))
+end = time.time()
+print("La query a mis {}s à s'exécuter".format(end-start))
 print(results.sort_values(by=['avg_price'], ascending=False).head(5))
 print(results.sort_values(by=['avg_tips'], ascending=False).head(5))
+print(results.sort_values(by=['avg_time'], ascending=True).head(5))
 
 # cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
 # fastest_h, fastest_ratio, fast_price = 0, 100000, 0
