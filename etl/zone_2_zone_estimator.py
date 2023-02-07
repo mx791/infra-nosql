@@ -8,22 +8,26 @@ mytable = mydb["taxis"]
 start_area = int(input("pickup area:"))
 destination_area =  int(input("dropoff area:"))
 
-myquery = [
-    {"$match": {"Pickup Community Area": start_area, "Dropoff Community Area": destination_area}},
-    {"$group": {
-        "_id": "$Pickup Hour",
-        "avg_seconds": {"$avg": "$Trip Seconds"},
-        "avg_distance": {"$avg": "$Trip Miles"},
-        "avg_price": {"$avg": "$Fare"},
-        "nb": {"$sum": 1}}
-    }
-]
 
 print("\nRecherche en cours...")
 start = time.time()
-results = list(mytable.aggregate(myquery))
+cc = 0
+for i in range(1, 50):
+    for e in range(1, 50):
+        myquery = [
+            {"$match": {"Pickup Community Area": start_area, "Dropoff Community Area": destination_area}},
+            {"$group": {
+                "_id": "$Pickup Hour",
+                "avg_seconds": {"$avg": "$Trip Seconds"},
+                "avg_distance": {"$avg": "$Trip Miles"},
+                "avg_price": {"$avg": "$Fare"},
+                "nb": {"$sum": 1}}
+            }
+        ]
+        results = list(mytable.aggregate(myquery))
+        cc += 1
 end = time.time()
-print("La requête a mis {}s à s'exécuter".format(end-start))
+print("La requête a mis {}s à s'exécuter".format((end-start)))
 nb = 0
 
 cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
