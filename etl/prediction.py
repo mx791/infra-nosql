@@ -25,7 +25,6 @@ start = time.time()
      #    "avg_dist" : {"$avg": "$Trip Miles"}}}
     #]
 
-myquery = 
 
 
 print("\nRecherche en cours...")
