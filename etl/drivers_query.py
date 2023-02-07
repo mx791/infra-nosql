@@ -22,7 +22,7 @@ myquery = [
         {"_id": "$Taxi ID", 
          "avg_price": {"$avg": "$Trip Total"}, 
          "avg_tips" : {"$avg": "$Tips"}, 
-         "avg_time" : {"$avg": "$Trip Seconds"}
+         "avg_time" : {"$avg": "$Trip Seconds"},
          "avg_dist" : {"$avg": "$Trip Miles"}}}
     ]
 
@@ -33,7 +33,7 @@ results = pd.DataFrame(list(mytable.aggregate(myquery)))
 end = time.time()
 print("La query a mis {}s à s'exécuter".format(np.round(end-start)))
 print(results.sort_values(by=['avg_price'], ascending=False).head(5))
-print(results.sort_values(by=['avg_tips'], ascending=False).head(5))
+print(results.sort_values(by=['avg_dist'], ascending=False).head(5))
 print(results.sort_values(by=['avg_time'], ascending=False).head(5))
 
 # cheapest_h, cheapest_ratio, cheapest_time = 0, 100000, 0
