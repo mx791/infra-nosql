@@ -15,16 +15,21 @@ myquery = [
 ]
 
 print("\nRecherche en cours...")
-start_time = time.time()
 
-results = list(mytable.aggregate(myquery))
+nb_execution = 10
+execution_times = []
 
-end_time = time.time()
+for i in range(nb_exection):
+    start_time = time.time()
+    results = list(mytable.aggregate(myquery))
+    execution_times.append(time.time() - start_time)
 
 min_tips_h, min_tips = 0, 100000
 max_tips_h, max_tips = 0, 0
 
+total_tips = 0
 nb = 0
+nb_community_area = 0
 
 for doc in results:
     if doc["_id"] != None:
@@ -35,10 +40,13 @@ for doc in results:
             max_tips_h = doc["_id"]
             max_tips = doc["avg_tips"]
         nb += doc["nb"]
+        total_tips += doc["avg_tips"]
+        nb_community_area += 1
     
             
-print("Comparaison de ", nb, "trajet\n")
-print(f"Dropoff Community Area {min_tips_h} avec la plus faible moyenne de tips : {min_tips}\n")
-print(f"Dropoff Community Area {max_tips_h} avec la plus forte moyenne  de tips : {max_tips}\n")
+print("Comparaison de ", nb, "trajet")
+print(f"Dropoff Community Area {min_tips_h} avec la plus faible moyenne de tips : {min_tips}")
+print(f"Moyenne tips sur toutes les Community Areas {total_tips/nb_community_area}")
+print(f"Dropoff Community Area {max_tips_h} avec la plus forte moyenne de tips : {max_tips}\n")
     
-print("Execution time : ", time.time() - start_time, "\n")
+print("Execution time : ", sum(execution_times)/nb_execution, "\n")
