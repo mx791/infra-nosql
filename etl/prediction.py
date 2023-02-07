@@ -25,10 +25,10 @@ start = time.time()
      #    "avg_dist" : {"$avg": "$Trip Miles"}}}
     #]
 
-myquery = {
+myquery = [{
   {"$Taxi ID" : "true",
    "$Trip Total" : "true"}
-}
+}]
 
 
 print("\nRecherche en cours...")
