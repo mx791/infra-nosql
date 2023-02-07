@@ -6,11 +6,11 @@ mydb = myclient["projet_nosql"]
 mytable = mydb["taxis"]
 
 myquery = [
-    {$group: {
-        _id: "$Dropoff Community Area",
-        avg_tips: {$avg: "$Tips"},
-        avg_distance: {$avg: "$Trip Miles"},
-        nb: {$sum: 1}}
+    {"$group": {
+        "_id": "$Dropoff Community Area",
+        "avg_tips": {"$avg": "$Tips"},
+        "avg_distance": {"$avg": "$Trip Miles"},
+        "nb": {"$sum": 1}}
     }
 ]
 
