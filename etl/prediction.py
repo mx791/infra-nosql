@@ -29,7 +29,7 @@ start = time.time()
 
 print("\nRecherche en cours...")
 
-results = pd.DataFrame(mytable.find({ "Trip Total" : "true"}))
+results = pd.DataFrame(list(mytable.find({ "Trip Total" : "true"})))
 end = time.time()
 print("La query a mis {}s à s'exécuter".format(np.round(end-start)))
 
