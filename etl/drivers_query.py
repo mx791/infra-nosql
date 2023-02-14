@@ -37,7 +37,7 @@ for _ in range(10):
     end = time.time()
     
     times.append(np.round(end-start))
-print("La query a mis en moyenne {}s à s'exécuter".format(np.mean(times))
+print("La query a mis en moyenne {}s à s'exécuter".format(np.mean(times)))
 
 print("\n Top 5 conducteurs avec le prix moyen le plus élevé")
 print(results.sort_values(by=['avg_price'], ascending=False).head(5))
