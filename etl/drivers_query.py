@@ -33,7 +33,7 @@ for _ in range(10):
 
 
     print("\nRecherche en cours...")
-    results = pd.DataFrame(list(mytable.aggregate(myquery)))
+    results = pd.DataFrame(list(mytable.aggregate(myquery))).dropna()
     end = time.time()
     
     times.append(np.round(end-start))
